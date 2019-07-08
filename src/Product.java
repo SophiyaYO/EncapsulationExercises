@@ -3,20 +3,22 @@ public class Product {
     private double cost;
 
     public Product(String name, double cost) {
-        this.setName();
-        this.setCost();
+        this.setName(name);
+        this.setCost(cost);
     }
 
-    private void setCost() {
+    private void setCost(double cost) {
         if (cost < 0) {
             validateNumber();
         }
+        this.cost = cost;
     }
 
-    private void setName() {
+    private void setName(String name) {
         if (name.trim().isEmpty()) {
             validateName();
         }
+        this.name = name;
     }
 
     public String getName() {
