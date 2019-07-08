@@ -51,7 +51,7 @@ public class Main {
 
         String command;
         while (!"ENd".equalsIgnoreCase(command = reader.readLine())) {
-            String[] personProduct = command.split("\\s*");
+            String[] personProduct = command.split("\\s+");
             String personName = personProduct[0];
             String productName = personProduct[1];
 
@@ -59,13 +59,11 @@ public class Main {
                 if (person.getName().equals(personName)) {
                     for (Product product : products) {
                         if (product.getName().equals(productName)) {
+                            int current = person.getListSize();
                             person.buyProduct(product);
-                            personProductMap.get(person).add(product);
-                            System.out.println(String.format(
-                                    "%s bought %s",
-                                    person.getName(),
-                                    product.getName()
-                            ));
+                            if (current < person.getListSize()) {
+                                personProductMap.get(person).add(product);
+                            }
                         }
                     }
                 }
