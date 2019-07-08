@@ -1,8 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -37,10 +39,10 @@ public class Main {
         List<Product> products = new ArrayList<>();
 
         for (String product : tokensProducts) {
-            String[] data = product.split("=");
+            String[] arrayProducts = product.split("=");
 
             try {
-                Product product1 = new Product(data[0], Double.parseDouble(data[1]));
+                Product product1 = new Product(arrayProducts[0], Double.parseDouble(arrayProducts[1]));
                 products.add(product1);
             } catch (IllegalArgumentException message) {
                 System.out.println(message.getMessage());
@@ -59,6 +61,11 @@ public class Main {
                         if (product.getName().equals(productName)) {
                             person.buyProduct(product);
                             personProductMap.get(person).add(product);
+                            System.out.println(String.format(
+                                    "%s bought %s",
+                                    person.getName(),
+                                    product.getName()
+                            ));
                         }
                     }
                 }
