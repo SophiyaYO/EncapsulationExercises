@@ -35,7 +35,7 @@ public class Product {
     }
 
     private void validateNumber() {
-        throw new IllegalArgumentException("Cost cannot be negative");
+        throw new IllegalArgumentException("Money cannot be negative");
 
     }
 
