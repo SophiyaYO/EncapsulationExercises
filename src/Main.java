@@ -63,6 +63,16 @@ public class Main {
                             person.buyProduct(product);
                             if (current < person.getListSize()) {
                                 personProductMap.get(person).add(product);
+
+                                System.out.println(String.format(
+                                        "%s bought %s",
+                                        person.getName(),
+                                        product.getName()
+                                ));
+                            } else {
+                                System.out.println(String.format("%s can't afford %s",
+                                        person.getName(),
+                                        product.getName()));
                             }
                         }
                     }

@@ -37,16 +37,8 @@ public class Person {
             products.add(product);
             this.money -= product.getCost();
 
-            System.out.println(String.format(
-                    "%s bought %s",
-                    this.getName(),
-                    product.getName()
-            ));
-        } else {
-            System.out.println(String.format("%s can't afford %s",
-                    this.name,
-                    product.getName()));
         }
+
     }
 
     public int getListSize() {
