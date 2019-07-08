@@ -28,6 +28,10 @@ public class Person {
         this.name = name;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void validateName() {
         throw new IllegalArgumentException("Name cannot be empty");
     }
