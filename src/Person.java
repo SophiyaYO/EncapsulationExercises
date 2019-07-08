@@ -49,6 +49,10 @@ public class Person {
         }
     }
 
+    public int getListSize() {
+        return this.products.size();
+    }
+
     private void validateName() {
         throw new IllegalArgumentException("Name cannot be empty");
     }
