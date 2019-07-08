@@ -16,11 +16,20 @@ public class Person {
         if (money < 0) {
             validationMoney();
         }
+
         this.money = money;
     }
 
     private void setName(String name) {
+        if (name.trim().isEmpty()) {
+            validateName();
+        }
 
+        this.name = name;
+    }
+
+    private void validateName() {
+        throw new IllegalArgumentException("Name cannot be empty");
     }
 
     private void validationMoney() {
