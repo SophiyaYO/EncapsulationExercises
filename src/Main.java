@@ -67,16 +67,10 @@ public class Main {
 
                             if (current < person.getListSize()) {
                                 personProductMap.get(person).add(product);
+                                printBoughtOrNot(person, product, "%s bought %s");
 
-                                System.out.println(String.format(
-                                        "%s bought %s",
-                                        person.getName(),
-                                        product.getName()
-                                ));
                             } else {
-                                System.out.println(String.format("%s can't afford %s",
-                                        person.getName(),
-                                        product.getName()));
+                                printBoughtOrNot(person, product, "%s can't afford %s");
                             }
                         }
                     }
@@ -108,6 +102,13 @@ public class Main {
             }
         }
 
+    }
 
+    private static void printBoughtOrNot(Person person, Product product, String text) {
+        System.out.println(String.format(
+                text,
+                person.getName(),
+                product.getName()
+        ));
     }
 }
