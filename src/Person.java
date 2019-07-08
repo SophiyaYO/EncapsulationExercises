@@ -21,7 +21,7 @@ public class Person {
     }
 
     private void setName(String name) {
-        if (name.trim().isEmpty()) {
+        if (name == null || name.trim().isEmpty()) {
             validateName();
         }
 
