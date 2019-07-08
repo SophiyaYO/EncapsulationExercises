@@ -43,5 +43,23 @@ public class Main {
                 System.out.println(message.getMessage());
             }
         }
+
+        String command;
+        while (!"ENd".equalsIgnoreCase(command = reader.readLine())) {
+            String[] personProduct = command.split("\\s*");
+            String personName = personProduct[0];
+            String productName = personProduct[1];
+
+            for (Person person : people) {
+                if (person.getName().equals(personName)) {
+                    for (Product product : products) {
+                        if (product.getName().equals(productName)) {
+                            person.buyProduct(product);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
