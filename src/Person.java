@@ -36,5 +36,15 @@ public class Person {
         throw new IllegalArgumentException("Money cannot be negative");
     }
 
+    public void buyProduct(Product product) {
+        if (product.getCost() > this.money) {
+            System.out.println(String.format("%s can't afford %s",
+                    this.name,
+                    product));
+        } else {
+            products.add(product);
+        }
+    }
+
 
 }

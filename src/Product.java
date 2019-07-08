@@ -19,6 +19,14 @@ public class Product {
         }
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public double getCost() {
+        return this.cost;
+    }
+
     private void validateName() {
         throw new IllegalArgumentException("Name cannot be empty");
 
