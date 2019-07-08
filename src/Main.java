@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -15,6 +16,7 @@ public class Main {
         String inputPeople = reader.readLine();
         String[] tokensPeople = inputPeople.split(";");
         List<Person> people = new ArrayList<>();
+        Map<Person, List<Product>> personProductMap = new LinkedHashMap<>();
 
         for (String token : tokensPeople) {
             String[] data = token.split("=");
@@ -22,6 +24,7 @@ public class Main {
             try {
                 Person person = new Person(data[0], Double.parseDouble(data[1]));
                 people.add(person);
+                personProductMap.putIfAbsent(person, new ArrayList<>());
 
             } catch (IllegalArgumentException message) {
                 System.out.println(message.getMessage());
@@ -55,11 +58,37 @@ public class Main {
                     for (Product product : products) {
                         if (product.getName().equals(productName)) {
                             person.buyProduct(product);
+                            personProductMap.get(person).add(product);
                         }
                     }
                 }
             }
         }
+
+
+        for (Map.Entry<Person, List<Product>> entry : personProductMap.entrySet()) {
+            if (entry.getValue().size() == 0) {
+                System.out.println(String.format("%s – Nothing bought",
+                        entry.getKey().getName()));
+            } else {
+                System.out.print(entry.getKey().getName() + " - ");
+
+                StringBuilder builder = new StringBuilder();
+                for (int product = 0; product < entry.getValue().size(); product++) {
+                    if (product == entry.getValue().size() - 1) {
+                        builder.append(entry.getValue().get(product).getName());
+                        break;
+                    }
+
+                    builder.append(entry.getValue().get(product).getName());
+                    builder.append(", ");
+                }
+
+                System.out.println(builder.toString().trim());
+
+            }
+        }
+
 
     }
 }
