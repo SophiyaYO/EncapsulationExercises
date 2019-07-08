@@ -24,7 +24,7 @@ public class Main {
             String[] data = token.split("=");
 
             try {
-                Person person = new Person(data[0], Double.parseDouble(data[1]));
+                Person person = new Person(data[0].trim(), Double.parseDouble(data[1].trim()));
                 people.add(person);
                 personProductMap.putIfAbsent(person, new ArrayList<>());
 
@@ -42,7 +42,7 @@ public class Main {
             String[] arrayProducts = product.split("=");
 
             try {
-                Product product1 = new Product(arrayProducts[0], Double.parseDouble(arrayProducts[1]));
+                Product product1 = new Product(arrayProducts[0].trim(), Double.parseDouble(arrayProducts[1].trim()));
                 products.add(product1);
             } catch (IllegalArgumentException message) {
                 System.out.println(message.getMessage());
