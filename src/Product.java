@@ -8,7 +8,7 @@ public class Product {
     }
 
     private void setCost(double cost) {
-        if (cost <= 0) {
+        if (cost < 0) {
             validateNumber();
         }
         this.cost = cost;
