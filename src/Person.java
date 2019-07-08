@@ -13,7 +13,7 @@ public class Person {
     }
 
     private void setMoney(double money) {
-        if (money < 0) {
+        if (money <= 0) {
             validationMoney();
         }
 

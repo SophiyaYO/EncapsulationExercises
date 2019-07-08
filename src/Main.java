@@ -24,7 +24,8 @@ public class Main {
             String[] data = token.split("=");
 
             try {
-                Person person = new Person(data[0].trim(), Double.parseDouble(data[1].trim()));
+                Person person = new Person(data[0].trim(),
+                        Double.parseDouble(data[1].trim()));
                 people.add(person);
                 personProductMap.putIfAbsent(person, new ArrayList<>());
 
@@ -81,7 +82,6 @@ public class Main {
             }
         }
 
-
         for (Map.Entry<Person, List<Product>> entry : personProductMap.entrySet()) {
             if (entry.getValue().size() == 0) {
                 System.out.println(String.format("%s – Nothing bought",
@@ -99,7 +99,9 @@ public class Main {
                     builder.append(", ");
                 }
 
-                System.out.println(entry.getKey().getName() + " - " + builder.toString().trim());
+                System.out.println(entry.getKey().getName() +
+                        " - " +
+                        builder.toString().trim());
 
             }
         }
