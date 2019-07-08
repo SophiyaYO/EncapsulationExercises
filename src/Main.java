@@ -17,40 +17,33 @@ public class Main {
 
         String inputPeople = reader.readLine();
         String[] tokensPeople = inputPeople.split(";");
+
         List<Person> people = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         Map<Person, List<Product>> personProductMap = new LinkedHashMap<>();
 
-        for (String token : tokensPeople) {
-            String[] data = token.split("=");
+        try {
+            for (String token : tokensPeople) {
+                String[] data = token.split("=");
 
-            try {
                 Person person = new Person(data[0].trim(),
                         Double.parseDouble(data[1].trim()));
+
                 people.add(person);
                 personProductMap.putIfAbsent(person, new ArrayList<>());
 
-            } catch (IllegalArgumentException message) {
-                System.out.println(message.getMessage());
-                return;
             }
 
-        }
+            String inputProducts = reader.readLine();
+            String[] tokensProducts = inputProducts.split(";");
 
-        String inputProducts = reader.readLine();
-        String[] tokensProducts = inputProducts.split(";");
-        List<Product> products = new ArrayList<>();
+            for (String product : tokensProducts) {
+                String[] arrayProducts = product.split("=");
 
-        for (String product : tokensProducts) {
-            String[] arrayProducts = product.split("=");
-
-            try {
                 Product product1 = new Product(arrayProducts[0].trim(), Double.parseDouble(arrayProducts[1].trim()));
                 products.add(product1);
-            } catch (IllegalArgumentException message) {
-                System.out.println(message.getMessage());
-                return;
+
             }
-        }
 
         String command;
         while (!"ENd".equalsIgnoreCase(command = reader.readLine())) {
@@ -65,13 +58,7 @@ public class Main {
                             int current = person.getListSize();
                             person.buyProduct(product);
 
-                            if (current < person.getListSize()) {
-                                personProductMap.get(person).add(product);
-                                printBoughtOrNot(person, product, "%s bought %s");
-
-                            } else {
-                                printBoughtOrNot(person, product, "%s can't afford %s");
-                            }
+                            checkPersonProductsCount(personProductMap, person, product, current);
                         }
                     }
                 }
@@ -101,7 +88,20 @@ public class Main {
 
             }
         }
+        } catch (IllegalArgumentException message) {
+            System.out.println(message.getMessage());
+        }
 
+    }
+
+    private static void checkPersonProductsCount(Map<Person, List<Product>> personProductMap, Person person, Product product, int current) {
+        if (current < person.getListSize()) {
+            personProductMap.get(person).add(product);
+            printBoughtOrNot(person, product, "%s bought %s");
+
+        } else {
+            printBoughtOrNot(person, product, "%s can't afford %s");
+        }
     }
 
     private static void printBoughtOrNot(Person person, Product product, String text) {
