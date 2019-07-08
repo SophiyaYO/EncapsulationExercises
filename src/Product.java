@@ -38,6 +38,4 @@ public class Product {
         throw new IllegalArgumentException("Money cannot be negative");
 
     }
-
-
 }

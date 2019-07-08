@@ -61,6 +61,7 @@ public class Main {
                         if (product.getName().equals(productName)) {
                             int current = person.getListSize();
                             person.buyProduct(product);
+
                             if (current < person.getListSize()) {
                                 personProductMap.get(person).add(product);
 
@@ -85,9 +86,8 @@ public class Main {
             if (entry.getValue().size() == 0) {
                 System.out.println(String.format("%s – Nothing bought",
                         entry.getKey().getName()));
-            } else {
-                System.out.print(entry.getKey().getName() + " - ");
 
+            } else {
                 StringBuilder builder = new StringBuilder();
                 for (int product = 0; product < entry.getValue().size(); product++) {
                     if (product == entry.getValue().size() - 1) {
@@ -99,7 +99,7 @@ public class Main {
                     builder.append(", ");
                 }
 
-                System.out.println(builder.toString().trim());
+                System.out.println(entry.getKey().getName() + " - " + builder.toString().trim());
 
             }
         }

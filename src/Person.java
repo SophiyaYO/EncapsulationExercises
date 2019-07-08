@@ -36,9 +36,7 @@ public class Person {
         if (product.getCost() <= this.money) {
             products.add(product);
             this.money -= product.getCost();
-
         }
-
     }
 
     public int getListSize() {
