@@ -18,7 +18,6 @@ public class Main {
         String inputPeople = reader.readLine();
         String[] tokensPeople = inputPeople.split(";");
 
-        List<Person> people = new ArrayList<>();
         List<Product> products = new ArrayList<>();
         Map<Person, List<Product>> personProductMap = new LinkedHashMap<>();
 
@@ -29,7 +28,6 @@ public class Main {
                 Person person = new Person(data[0].trim(),
                         Double.parseDouble(data[1].trim()));
 
-                people.add(person);
                 personProductMap.putIfAbsent(person, new ArrayList<>());
 
             }
@@ -48,21 +46,24 @@ public class Main {
         String command;
         while (!"ENd".equalsIgnoreCase(command = reader.readLine())) {
             String[] personProduct = command.split("\\s+");
-            String personName = personProduct[0];
-            String productName = personProduct[1];
+            String personName = personProduct[0].trim();
+            String productName = personProduct[1].trim();
 
-            for (Person person : people) {
-                if (person.getName().equals(personName)) {
+            for (Map.Entry<Person, List<Product>> kv : personProductMap.entrySet()) {
+                if (kv.getKey().getName().equals(personName)) {
+
                     for (Product product : products) {
                         if (product.getName().equals(productName)) {
-                            int current = person.getListSize();
-                            person.buyProduct(product);
+                            int current = kv.getKey().getListSize();
+                            kv.getKey().buyProduct(product);
 
-                            checkPersonProductsCount(personProductMap, person, product, current);
+                            checkPersonProductsCount(personProductMap, kv.getKey(), product, current);
+
                         }
                     }
                 }
             }
+
         }
 
         for (Map.Entry<Person, List<Product>> entry : personProductMap.entrySet()) {
