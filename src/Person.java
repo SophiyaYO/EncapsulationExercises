@@ -28,7 +28,7 @@ public class Person {
         this.name = name;
     }
 
-    private void validateName() {
+    public void validateName() {
         throw new IllegalArgumentException("Name cannot be empty");
     }
 
