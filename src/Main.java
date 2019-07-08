@@ -31,6 +31,7 @@ public class Main {
 
             } catch (IllegalArgumentException message) {
                 System.out.println(message.getMessage());
+                return;
             }
 
         }
@@ -47,6 +48,7 @@ public class Main {
                 products.add(product1);
             } catch (IllegalArgumentException message) {
                 System.out.println(message.getMessage());
+                return;
             }
         }
 
