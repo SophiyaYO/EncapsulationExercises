@@ -20,6 +20,7 @@ public class Main {
         String inputProducts = reader.readLine();
         String[] tokensProducts = inputProducts.split(";");
         List<Product> products = new ArrayList<>();
+        List<String> names = new ArrayList<>();
         Map<Person, List<Product>> personProductMap = new LinkedHashMap<>();
 
         try {
@@ -28,6 +29,8 @@ public class Main {
 
                 Person person = new Person(data[0].trim(),
                         Double.parseDouble(data[1].trim()));
+
+                names.add(data[0].trim());
 
                 personProductMap.putIfAbsent(person, new ArrayList<>());
 
@@ -47,21 +50,20 @@ public class Main {
                 String personName = personProduct[0].trim();
                 String productName = personProduct[1].trim();
 
-                for (Map.Entry<Person, List<Product>> kv : personProductMap.entrySet()) {
-                    if (kv.getKey().getName().equals(personName)) {
+                    for (Map.Entry<Person, List<Product>> kv : personProductMap.entrySet()) {
+                        if (kv.getKey().getName().equals(personName)) {
 
-                        for (Product product : products) {
-                            if (product.getName().equals(productName)) {
-                                int current = kv.getKey().getListSize();
-                                kv.getKey().buyProduct(product);
+                            for (Product product : products) {
+                                if (product.getName().equals(productName)) {
+                                    int current = kv.getKey().getListSize();
+                                    kv.getKey().buyProduct(product);
 
-                                checkPersonProductsCount(personProductMap, kv.getKey(), product, current);
+                                    checkPersonProductsCount(personProductMap, kv.getKey(), product, current);
 
+                                }
                             }
                         }
                     }
-                }
-
             }
 
             for (Map.Entry<Person, List<Product>> entry : personProductMap.entrySet()) {

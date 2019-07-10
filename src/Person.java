@@ -50,6 +50,4 @@ public class Person {
     private void validationMoney() {
         throw new IllegalArgumentException("Money cannot be negative");
     }
-
-
 }
