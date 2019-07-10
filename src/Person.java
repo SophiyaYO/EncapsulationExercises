@@ -36,6 +36,10 @@ public class Person {
         if (product.getCost() <= this.money) {
             products.add(product);
             this.money -= product.getCost();
+        } else {
+            throw new IllegalArgumentException(String.format("%s can't afford %s",
+                    this.getName(),
+                    product.getName()));
         }
     }
 
