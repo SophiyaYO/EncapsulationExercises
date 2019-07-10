@@ -17,7 +17,8 @@ public class Main {
 
         String inputPeople = reader.readLine();
         String[] tokensPeople = inputPeople.split(";");
-
+        String inputProducts = reader.readLine();
+        String[] tokensProducts = inputProducts.split(";");
         List<Product> products = new ArrayList<>();
         Map<Person, List<Product>> personProductMap = new LinkedHashMap<>();
 
@@ -32,9 +33,6 @@ public class Main {
 
             }
 
-            String inputProducts = reader.readLine();
-            String[] tokensProducts = inputProducts.split(";");
-
             for (String product : tokensProducts) {
                 String[] arrayProducts = product.split("=");
 
@@ -43,52 +41,52 @@ public class Main {
 
             }
 
-        String command;
-        while (!"ENd".equalsIgnoreCase(command = reader.readLine())) {
-            String[] personProduct = command.split("\\s+");
-            String personName = personProduct[0].trim();
-            String productName = personProduct[1].trim();
+            String command;
+            while (!"ENd".equalsIgnoreCase(command = reader.readLine())) {
+                String[] personProduct = command.split("\\s+");
+                String personName = personProduct[0].trim();
+                String productName = personProduct[1].trim();
 
-            for (Map.Entry<Person, List<Product>> kv : personProductMap.entrySet()) {
-                if (kv.getKey().getName().equals(personName)) {
+                for (Map.Entry<Person, List<Product>> kv : personProductMap.entrySet()) {
+                    if (kv.getKey().getName().equals(personName)) {
 
-                    for (Product product : products) {
-                        if (product.getName().equals(productName)) {
-                            int current = kv.getKey().getListSize();
-                            kv.getKey().buyProduct(product);
+                        for (Product product : products) {
+                            if (product.getName().equals(productName)) {
+                                int current = kv.getKey().getListSize();
+                                kv.getKey().buyProduct(product);
 
-                            checkPersonProductsCount(personProductMap, kv.getKey(), product, current);
+                                checkPersonProductsCount(personProductMap, kv.getKey(), product, current);
 
+                            }
                         }
                     }
                 }
+
             }
 
-        }
+            for (Map.Entry<Person, List<Product>> entry : personProductMap.entrySet()) {
+                if (entry.getValue().size() == 0) {
+                    System.out.println(String.format("%s – Nothing bought",
+                            entry.getKey().getName()));
 
-        for (Map.Entry<Person, List<Product>> entry : personProductMap.entrySet()) {
-            if (entry.getValue().size() == 0) {
-                System.out.println(String.format("%s – Nothing bought",
-                        entry.getKey().getName()));
+                } else {
+                    StringBuilder builder = new StringBuilder();
+                    for (int product = 0; product < entry.getValue().size(); product++) {
+                        if (product == entry.getValue().size() - 1) {
+                            builder.append(entry.getValue().get(product).getName());
+                            break;
+                        }
 
-            } else {
-                StringBuilder builder = new StringBuilder();
-                for (int product = 0; product < entry.getValue().size(); product++) {
-                    if (product == entry.getValue().size() - 1) {
                         builder.append(entry.getValue().get(product).getName());
-                        break;
+                        builder.append(", ");
                     }
 
-                    builder.append(entry.getValue().get(product).getName());
-                    builder.append(", ");
+                    System.out.println(entry.getKey().getName() +
+                            " - " +
+                            builder.toString().trim());
+
                 }
-
-                System.out.println(entry.getKey().getName() +
-                        " - " +
-                        builder.toString().trim());
-
             }
-        }
         } catch (IllegalArgumentException message) {
             System.out.println(message.getMessage());
         }
